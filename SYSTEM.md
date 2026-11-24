@@ -92,10 +92,14 @@ Orientacyjnie: szlemik ≈ 33 PC na linii, szlem ≈ 37 PC (ogólna reguła, nie
 - **2♠ po 1BA:** to zgłoszenie młodszych (5+♣ / 5+♦ / 4-4), a nie pytanie — otwierający odpowiada 3♣ obowiązkowo.
 - **1♦:** od 3 kart. Karteczka podaje ogólnie „1 kolor = 5+ kart”; ustalono, że dotyczy to tylko starszych.
 
+## Ustalone (listopad 2026)
+
+- **2♣ — „lub”, nie „i”:** otwarcie 2♣ to 22+ PC **lub** szybkie lewy z góry. Plus na karteczce znaczy „albo”.
+- **2♠ → 3♣:** dalszego ciągu po przymusowym 3♣ celowo nie zapisujemy na kartach.
+
 ## Do ustalenia
 
-- **2♣ — szybkie lewy:** na karteczce odczytane jako „4 szybkie lewy z góry”. Jeśli miało być „2”, popraw w `build/content.py`.
-- **2♠ → 3♣ → ?** Co odpowiadający robi po przymusowym 3♣ (typowo: pas z treflami, 3♦ z karami, coś innego z 4-4).
+- **2♣ — liczba szybkich lew:** na karteczce odczytane jako „4 szybkie lewy z góry”. Jeśli miało być „2”, popraw w `build/content.py`.
 - **Cappelletti „od ok. 14 PC”** — tak zapisano na karteczce; w praktyce wiele par wchodzi lżej, zwłaszcza z dobrym układem.
 
 ## Na tle innych systemów
