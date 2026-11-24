@@ -189,3 +189,18 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .table-svg{overflow:visible}
 .t-ghosthand .t-card{fill:var(--paper);stroke-dasharray:5 4}
 .t-ghosthand:hover .t-card{fill:var(--white);stroke-dasharray:none}
+
+/* galeria ściągawek */
+.gal{border:0;padding:0;margin:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;background:var(--paper);color:var(--ink)}
+.gal::backdrop{background:var(--paper)}
+.gal-bar{display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;background:var(--white);border-bottom:2px solid var(--ink)}
+.gal-bar .btn{padding:7px 14px;font-size:16px;cursor:pointer}
+.gal-bar .btn.primary{box-shadow:3px 3px 0 var(--ink)}
+.gal-count{font-family:var(--hand);font-weight:800;font-size:19px;min-width:3.2em}
+.gal-nav{display:flex;gap:10px;margin-right:auto}
+.gal-bar [data-save-all]{margin-left:auto}
+.gal-strip{display:flex;height:calc(100% - 60px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;outline:0}
+.gal-strip::-webkit-scrollbar{display:none}
+.gal-strip figure{flex:0 0 100%;min-width:0;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:14px}
+.gal-strip img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border:2px solid var(--ink);border-radius:6px}
+@media (max-width:640px){.gal-nav{display:none}.gal-bar{gap:8px;padding:0 10px}.gal-strip figure{padding:8px}}

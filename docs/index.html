@@ -122,7 +122,7 @@
 <section class="block" id="sciagawki">
   <div class="wrap">
     <h2>Ściągawki</h2>
-    <p class="intro">Cztery karty w formacie ekranu telefonu. Stuknij kartę, żeby otworzyć ją w pełnym rozmiarze, i zapisz w galerii. Wolisz papier? Pobierz PDF i wydrukuj.</p>
+    <p class="intro">Cztery karty w formacie ekranu telefonu. Stuknij dowolną, żeby przeglądać je na pełnym ekranie i przesuwać palcem. Możesz też pobrać wszystkie naraz albo wydrukować PDF.</p>
     <div class="downloads">
       <a href="karty/bryd-1-otwarcia.png" target="_blank" rel="noopener"><img src="karty/bryd-1-otwarcia.png" alt="Karta 1: Otwarcia" loading="lazy" width="1080" height="1920"></a>
       <a href="karty/bryd-2-odpowiedzi.png" target="_blank" rel="noopener"><img src="karty/bryd-2-odpowiedzi.png" alt="Karta 2: Odpowiedzi" loading="lazy" width="1080" height="1920"></a>
@@ -130,7 +130,8 @@
       <a href="karty/bryd-4-asy.png" target="_blank" rel="noopener"><img src="karty/bryd-4-asy.png" alt="Karta 4: Pytanie o asy" loading="lazy" width="1080" height="1920"></a>
     </div>
     <div class="dl-row">
-      <a class="btn primary" href="karty/karty-do-druku.pdf">Pobierz PDF do druku</a>
+      <a class="btn primary" href="karty/ciupiemy-sciagawki.zip" download data-save-all>Pobierz wszystkie karty</a>
+      <a class="btn" href="karty/karty-do-druku.pdf">Pobierz PDF do druku</a>
       <p>Jedna kartka A4, cztery karty, jasne tło oszczędzające tusz. Po wycięciu karta ma ok. 7,5 × 13,5 cm.</p>
     </div>
   </div>
@@ -163,5 +164,58 @@
     <span>Poniedziałki od 18:00, Léa Bistro</span>
   </footer>
 </div>
+<dialog class="gal" id="galeria" aria-label="Ściągawki">
+  <div class="gal-bar">
+    <span class="gal-count" aria-live="polite">1 / 4</span>
+    <span class="gal-nav">
+      <button type="button" class="btn" data-step="-1">Poprzednia</button>
+      <button type="button" class="btn" data-step="1">Następna</button>
+    </span>
+    <a class="btn primary" href="karty/ciupiemy-sciagawki.zip" download data-save-all>Pobierz wszystkie</a>
+    <button type="button" class="btn" data-close>Zamknij</button>
+  </div>
+  <div class="gal-strip" tabindex="0">
+      <figure><img src="karty/bryd-1-otwarcia.png" alt="Karta 1: Otwarcia" loading="lazy" width="1080" height="1920"></figure>
+      <figure><img src="karty/bryd-2-odpowiedzi.png" alt="Karta 2: Odpowiedzi" loading="lazy" width="1080" height="1920"></figure>
+      <figure><img src="karty/bryd-3-obrona.png" alt="Karta 3: Obrona" loading="lazy" width="1080" height="1920"></figure>
+      <figure><img src="karty/bryd-4-asy.png" alt="Karta 4: Pytanie o asy" loading="lazy" width="1080" height="1920"></figure>
+  </div>
+</dialog>
+<script>
+(function(){
+  var d=document.getElementById('galeria'); if(!d||!d.showModal) return;
+  var strip=d.querySelector('.gal-strip'), count=d.querySelector('.gal-count'), n=strip.children.length;
+  function go(i,smooth){strip.scrollTo({left:i*strip.clientWidth,behavior:smooth?'smooth':'instant'});}
+  function cur(){return Math.round(strip.scrollLeft/strip.clientWidth);}
+  document.querySelectorAll('.downloads a').forEach(function(a,i){
+    a.addEventListener('click',function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey) return;
+      e.preventDefault(); d.showModal(); go(i,false); count.textContent=(i+1)+' / '+n; strip.focus();
+    });
+  });
+  strip.addEventListener('scroll',function(){count.textContent=(cur()+1)+' / '+n;});
+  d.querySelector('[data-close]').addEventListener('click',function(){d.close();});
+  d.querySelectorAll('[data-step]').forEach(function(b){
+    b.addEventListener('click',function(){go(Math.max(0,Math.min(n-1,cur()+Number(b.dataset.step))),true);});
+  });
+  d.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){e.preventDefault();go(Math.min(n-1,cur()+1),true);}
+    if(e.key==='ArrowLeft'){e.preventDefault();go(Math.max(0,cur()-1),true);}
+  });
+  /* Na telefonie: systemowe "Zapisz 4 obrazy" zamiast paczki ZIP. */
+  var touch=window.matchMedia&&matchMedia('(pointer:coarse)').matches, canFiles=false;
+  try{canFiles=touch&&navigator.canShare&&navigator.canShare({files:[new File([''],'a.png',{type:'image/png'})]});}catch(e){}
+  if(canFiles) document.querySelectorAll('[data-save-all]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var urls=[].map.call(document.querySelectorAll('.downloads a'),function(x){return x.href;});
+      Promise.all(urls.map(function(u){
+        return fetch(u).then(function(r){return r.blob();}).then(function(b){return new File([b],u.split('/').pop(),{type:'image/png'});});
+      })).then(function(files){return navigator.share({files:files});})
+        .catch(function(err){if(err&&err.name!=='AbortError') location.href=a.href;});
+    });
+  });
+})();
+</script>
 </body>
 </html>

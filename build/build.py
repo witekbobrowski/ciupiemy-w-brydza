@@ -2,6 +2,7 @@
 """
 Buduje wszystko z build/content.py:
   docs/karty/bryd-N-*.png       karty na telefon, 1080x1920 (9:16)
+  docs/karty/ciupiemy-sciagawki.zip  wszystkie karty PNG w jednej paczce
   docs/karty/karty-do-druku.pdf A4 pionowo, 4 karty na jednej stronie, jasny motyw
   docs/index.html, docs/system/index.html   strona klubu
 
@@ -9,7 +10,7 @@ Wymaga: pip install playwright && playwright install chromium
 Użycie:  python build/build.py
 Inny Chrome: CHROME_PATH=/ścieżka/do/chrome python build/build.py
 """
-import asyncio, html, os, re, shutil, sys
+import asyncio, html, os, re, shutil, sys, zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -21,6 +22,7 @@ ROOT = B.parent
 DOCS = ROOT / "docs"
 KARTY = DOCS / "karty"
 TMP = B / ".tmp"
+ZIP_NAME = "ciupiemy-sciagawki.zip"
 
 FONTS = [("Shantell Sans", "shantell-sans", (500, 700, 800)),
          ("Source", "source-sans-3", (400, 600, 700))]
@@ -117,8 +119,12 @@ def build_site():
         f'      <a href="karty/{png_name(c)}" target="_blank" rel="noopener">'
         f'<img src="karty/{png_name(c)}" alt="Karta {c.no}: {html.escape(c.title)}" loading="lazy" width="1080" height="1920"></a>'
         for c in CARDS)
+    gallery = "\n".join(
+        f'      <figure><img src="karty/{png_name(c)}" alt="Karta {c.no}: {html.escape(c.title)}" loading="lazy" '
+        f'width="1080" height="1920"></figure>'
+        for c in CARDS)
     idx = (B / "templates/index.html").read_text()
-    idx = idx.replace("{{THUMBS}}", thumbs).replace("{{ROOT}}", "")
+    idx = idx.replace("{{THUMBS}}", thumbs).replace("{{GALLERY}}", gallery).replace("{{ROOT}}", "")
     (DOCS / "index.html").write_text(idx)
 
     nav = "\n".join(f'<a href="#{c.slug}"><b>{c.no}</b>{html.escape(c.title)}</a>' for c in CARDS)
@@ -179,6 +185,11 @@ async def build_cards():
             over = await pg.evaluate("[...document.querySelectorAll('main,.panel')].some(e=>e.scrollHeight>e.clientHeight+1)")
             await pg.locator(".card").screenshot(path=str(KARTY / png_name(c)))
             print(f"  PNG  {png_name(c)}" + ("   UWAGA: treść się nie mieści!" if over else ""))
+        # jedna paczka ze wszystkimi kartami; stała data, żeby plik nie zmieniał się bez powodu
+        with zipfile.ZipFile(KARTY / ZIP_NAME, "w", zipfile.ZIP_STORED) as z:
+            for c in CARDS:
+                z.writestr(zipfile.ZipInfo(png_name(c), (2026, 1, 1, 0, 0, 0)), (KARTY / png_name(c)).read_bytes())
+        print(f"  ZIP  {ZIP_NAME}")
         f = TMP / "druk.html"
         f.write_text(print_html(css))
         await pg.goto(f.as_uri())

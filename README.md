@@ -47,6 +47,8 @@ Gdy jakiś tekst nie zmieści się na karcie, `build.py` wypisze `UWAGA: treść
 
 ## Druk
 
+`docs/karty/ciupiemy-sciagawki.zip` — wszystkie karty PNG w jednej paczce (przycisk „Pobierz wszystkie karty”; na telefonie strona proponuje zapis obrazów do galerii).
+
 `docs/karty/karty-do-druku.pdf` — A4 pionowo, 4 karty na jednej stronie, białe tło.
 Drukuj w skali 100% („Rzeczywisty rozmiar”), nie „Dopasuj do strony”. Wytnij po przerywanej linii —
 karta ma ok. 7,5 × 13,5 cm. Dobrze wygląda zalaminowana.
