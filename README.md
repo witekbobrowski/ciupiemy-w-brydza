@@ -1,75 +1,90 @@
 # Ciupiemy w brydża
 
-Strona i ściągawki krakowskiego klubu brydżowego **Ciupiemy w brydża**.
+Strona i ściągawki krakowskiego klubu brydżowego **Ciupiemy w brydża**. Gramy i uczymy się brydża
+w poniedziałki od 18:00 w Léa Bistro, ul. Juliusza Lea 11b, Kraków. Początkujący mile widziani.
 
-**Gramy w poniedziałki od 18:00** w Léa Bistro, ul. Juliusza Lea 11b, Kraków.
+**[ciupiemy.pl](https://ciupiemy.pl/)** · [System licytacji](https://ciupiemy.pl/system/) · [Karty do druku (PDF)](https://ciupiemy.pl/karty/karty-do-druku.pdf)
 
-- Strona: **https://ciupiemy.pl** (po podpięciu domeny; do tego czasu adres `github.io`)
-- System licytacji: **/system**
-- Karty do druku: **/karty/karty-do-druku.pdf**
+[![Ciupiemy w brydża: brydż dla początkujących, poniedziałki od 18:00, Léa Bistro, Kraków](docs/assets/og.png)](https://ciupiemy.pl/)
 
-## Co jest w repozytorium
+> **In English:** website and bidding cheat sheets of a beginner-friendly bridge club in Kraków, Poland.
+> One Python file holds the bidding system; a small build script turns it into phone-sized cards (PNG),
+> a printable PDF and a static site. Content is in Polish. Feel free to reuse it for your own club.
+
+## Co tu jest
+
+- **Strona klubu**: kiedy i gdzie gramy, jak wygląda gra z początkującymi, polecane aplikacje.
+- **System licytacji**: naturalny, pięciokartowe starsze, najbliżej SAYC. Opis i uzasadnienie w [SYSTEM.md](SYSTEM.md).
+- **Ściągawki**: cztery karty w formacie ekranu telefonu (PNG 1080 × 1920), paczka ZIP i PDF do druku.
+
+Wszystko powstaje z jednego pliku z treścią, więc karty, PDF i strona nigdy się ze sobą nie rozjeżdżają.
+
+## Układ repozytorium
 
 ```
-build/                  generator — tu się wszystko zmienia
-  content.py            TREŚĆ KART (system licytacji) — jedyne źródło prawdy
-  build.py              buduje karty PNG, PDF i stronę
+build/                  generator: tu się wszystko zmienia
+  content.py            treść kart i systemu, jedyne źródło prawdy; także adres strony (SITE_URL)
+  build.py              buduje karty PNG, ZIP, PDF, stronę i obrazek podglądu linku
   components.css        wspólny wygląd paneli i kafelków odzywek
-  card.css              rama karty 9:16 + jasny motyw do druku
+  card.css              rama karty 9:16 i motyw do druku
   site.css              wygląd strony
-  templates/            szablony HTML strony głównej i strony systemu
-  fonts/                Shantell Sans, Source Sans 3 (licencja SIL OFL), symbole kolorów z DejaVu Sans
-docs/                   gotowa strona (GitHub Pages serwuje ten folder)
-  index.html            strona główna
-  system/index.html     system licytacji (ciupiemy.pl/system)
-  karty/                4 karty PNG 1080×1920 + PDF do druku
-SYSTEM.md               pełny opis systemu, ustalenia i otwarte pytania
-zrodla/                 zdjęcia oryginalnych odręcznych karteczek i poprawek
+  templates/            szablony strony głównej i strony systemu
+  fonts/                Shantell Sans, Source Sans 3, symbole kolorów z DejaVu Sans (z licencjami)
+docs/                   gotowa strona; GitHub Pages serwuje ten folder (nie edytuj ręcznie)
+SYSTEM.md               pełny opis systemu, historia poprawek i otwarte pytania
+zrodla/                 zdjęcia odręcznych karteczek, od których wszystko się zaczęło
 ```
 
-## Jak zmienić system
+## Jak zbudować
 
-1. Popraw tekst w `build/content.py` (składnia opisana na górze pliku).
-2. Zbuduj:
+Potrzebny jest Python 3.10+ i Chromium, które instaluje Playwright.
 
-   ```bash
-   python -m venv .venv && source .venv/bin/activate
-   pip install -r build/requirements.txt
-   playwright install chromium          # tylko za pierwszym razem
-   python build/build.py
-   ```
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r build/requirements.txt
+playwright install chromium          # tylko za pierwszym razem
+python build/build.py
+python -m http.server -d docs 8000   # podgląd: http://localhost:8000
+```
 
-3. Obejrzyj lokalnie: `python -m http.server -d docs 8000` → http://localhost:8000
-4. Zatwierdź i wypchnij (`git add -A && git commit -m "..." && git push`). Strona odświeży się sama po minucie lub dwóch.
+Inna przeglądarka: `CHROME_PATH=/ścieżka/do/chrome python build/build.py`.
 
-Karty PNG, PDF i strona zawsze powstają z tej samej treści, więc nie rozjadą się ze sobą.
-Gdy jakiś tekst nie zmieści się na karcie, `build.py` wypisze `UWAGA: treść się nie mieści!`.
+## Jak zmienić system albo stronę
+
+1. Treść kart i systemu popraw w `build/content.py` (składnia jest opisana na górze pliku),
+   teksty strony w `build/templates/`, wygląd w plikach CSS.
+2. Uruchom `python build/build.py`. Gdy tekst nie zmieści się na karcie, skrypt wypisze
+   `UWAGA: treść się nie mieści!`. To błąd: skróć tekst.
+3. Obejrzyj stronę lokalnie, zatwierdź źródła razem z `docs/` i wypchnij. Strona odświeży się po minucie lub dwóch.
 
 ## Druk
 
-`docs/karty/ciupiemy-sciagawki.zip` — wszystkie karty PNG w jednej paczce (przycisk „Pobierz wszystkie karty”; na telefonie strona proponuje zapis obrazów do galerii).
+`docs/karty/karty-do-druku.pdf` to jedna kartka A4 pionowo z czterema kartami na białym tle.
+Drukuj w skali 100% („Rzeczywisty rozmiar”), nie „Dopasuj do strony”, i wytnij po przerywanej linii.
+Karta ma ok. 7,5 × 13,5 cm i dobrze wygląda zalaminowana.
 
-`docs/karty/karty-do-druku.pdf` — A4 pionowo, 4 karty na jednej stronie, białe tło.
-Drukuj w skali 100% („Rzeczywisty rozmiar”), nie „Dopasuj do strony”. Wytnij po przerywanej linii —
-karta ma ok. 7,5 × 13,5 cm. Dobrze wygląda zalaminowana.
+## Hosting
 
-## Hosting i domena (GitHub Pages)
+Strona działa na GitHub Pages z gałęzi `main`, folder `/docs`, pod własną domeną `ciupiemy.pl`.
 
-1. Repozytorium na GitHubie → **Settings → Pages** → Source: *Deploy from a branch*, branch `main`, folder `/docs`.
-2. Po zakupie domeny: **Settings → Pages → Custom domain** wpisz `ciupiemy.pl` (plik `docs/CNAME` tworzy się przy budowaniu z `SITE_URL` w `build/content.py`). U rejestratora domeny ustaw DNS:
+- Adres strony jest w `SITE_URL` w `build/content.py`. Budowanie tworzy z niego `docs/CNAME`
+  i adresy w podglądzie linku (`docs/assets/og.png`, znaczniki Open Graph).
+- DNS domeny: cztery rekordy A na adresy GitHub Pages (`185.199.108.153`, `185.199.109.153`,
+  `185.199.110.153`, `185.199.111.153`) oraz CNAME `www` na `witekbobrowski.github.io`.
+  Aktualne adresy są w [dokumentacji GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
-   | Typ   | Nazwa | Wartość |
-   |-------|-------|---------|
-   | A     | @     | 185.199.108.153 |
-   | A     | @     | 185.199.109.153 |
-   | A     | @     | 185.199.110.153 |
-   | A     | @     | 185.199.111.153 |
-   | CNAME | www   | `witekbobrowski.github.io` |
+## Chcesz użyć tego w swoim klubie?
 
-3. Po propagacji DNS (zwykle do kilku godzin) w **Settings → Pages** zaznacz **Enforce HTTPS**.
+Śmiało. Zrób fork, podmień treść w `build/content.py` i teksty w `build/templates/`, ustaw swój
+`SITE_URL` i zbuduj. Prosimy tylko o podanie źródła (szczegóły niżej).
 
-Aktualne adresy IP GitHub Pages: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+## Jak pomóc
 
-## Podgląd linku
+Zauważone błędy i pomysły zgłaszaj w [issues](https://github.com/witekbobrowski/ciupiemy-w-brydza/issues).
+Zasady dla poprawek są w [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Obrazek `docs/assets/og.png` (1200 × 630) i znaczniki Open Graph powstają przy budowaniu. Adres strony jest w `SITE_URL` w `build/content.py`; po podpięciu domeny trzeba go zmienić i zbudować stronę od nowa.
+## Licencja
+
+- Kod generatora: [MIT](LICENSE).
+- Treść (opis systemu, teksty, karty, ilustracje, zdjęcia): [CC BY 4.0](LICENSE-CONTENT.md).
+- Kroje pisma w `build/fonts/` mają własne licencje, dołączone obok plików.

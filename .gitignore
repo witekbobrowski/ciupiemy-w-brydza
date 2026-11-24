@@ -2,3 +2,6 @@ __pycache__/
 build/.tmp/
 .venv/
 .DS_Store
+*.pyc
+.idea/
+.vscode/

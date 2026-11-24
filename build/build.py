@@ -5,6 +5,8 @@ Buduje wszystko z build/content.py:
   docs/karty/ciupiemy-sciagawki.zip  wszystkie karty PNG w jednej paczce
   docs/karty/karty-do-druku.pdf A4 pionowo, 4 karty na jednej stronie, jasny motyw
   docs/index.html, docs/system/index.html   strona klubu
+  docs/assets/og.png            obrazek podglądu linku, 1200x630
+  docs/CNAME                    własna domena, z SITE_URL w content.py
 
 Wymaga: pip install playwright && playwright install chromium
 Użycie:  python build/build.py
