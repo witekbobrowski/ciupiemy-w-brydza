@@ -94,12 +94,11 @@ Orientacyjnie: szlemik ≈ 33 PC na linii, szlem ≈ 37 PC (ogólna reguła, nie
 
 ## Ustalone (listopad 2026)
 
-- **2♣ — „lub”, nie „i”:** otwarcie 2♣ to 22+ PC **lub** szybkie lewy z góry. Plus na karteczce znaczy „albo”.
+- **2♣ — „lub”, nie „i”:** otwarcie 2♣ to 22+ PC **lub 4** szybkie lewy z góry. Plus na karteczce znaczy „albo”.
 - **2♠ → 3♣:** dalszego ciągu po przymusowym 3♣ celowo nie zapisujemy na kartach.
 
 ## Do ustalenia
 
-- **2♣ — liczba szybkich lew:** na karteczce odczytane jako „4 szybkie lewy z góry”. Jeśli miało być „2”, popraw w `build/content.py`.
 - **Cappelletti „od ok. 14 PC”** — tak zapisano na karteczce; w praktyce wiele par wchodzi lżej, zwłaszcza z dobrym układem.
 
 ## Na tle innych systemów
