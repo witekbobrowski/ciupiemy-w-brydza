@@ -164,3 +164,8 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .t-water{fill:#CFE3F5;stroke-width:1.5}
 .t-beer{fill:var(--marker);stroke-width:1.5}
 .t-foam{fill:var(--white);stroke:none}
+.t-bcard{fill:var(--white);stroke:var(--ink);stroke-width:2}
+.t-bpass{fill:#BFE8C6}
+.t-bstripe{stroke:var(--ink);stroke-width:2}
+.t-bred{fill:var(--red)}
+.t-bcard.t-yours{fill:var(--marker);stroke-dasharray:6 5}
