@@ -136,3 +136,17 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .conv-row dd{font-size:18px;line-height:1.4}
 .conv-row dd a{white-space:nowrap;font-size:16px;margin-left:4px}
 @media (max-width:640px){.conv-row{grid-template-columns:1fr}.conv-row dd a{display:inline-block;margin-left:0}}
+
+/* stół w hero */
+.t-card{fill:var(--white);stroke:var(--ink);stroke-width:2}
+.t-back{fill:var(--ink);opacity:.14}
+.t-ghost{fill:var(--paper);stroke:var(--ink);stroke-width:2;stroke-dasharray:6 5}
+.t-shadow{fill:var(--ink)}
+.t-top{fill:var(--table);stroke:var(--ink);stroke-width:2}
+.t-seat{font-family:var(--hand);font-weight:800;font-size:19px;fill:#fff}
+.t-tile{fill:var(--white);stroke:var(--ink);stroke-width:2}
+.t-yours{fill:var(--marker);stroke-dasharray:6 5}
+.t-bid{font-family:var(--hand);font-weight:800;font-size:21px;fill:var(--ink)}
+.t-pass{font-family:var(--hand);font-weight:700;font-size:16px;fill:var(--ink)}
+.t-suit{font-family:'DejaVu Sans',sans-serif;font-size:20px;fill:var(--red)}
+.table-cap{font-family:var(--hand);font-weight:700;font-size:21px;text-align:center;max-width:none;margin-top:4px}
