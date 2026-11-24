@@ -1,0 +1,35 @@
+/* Wspólne elementy: kafelki odzywek, panele, notki. Używane w kartach i na stronie. */
+:root{
+  --felt:#0E3A2C; --felt2:#082A20; --felt3:#15513D; --cream:#F7F0E1; --paper:#FFFDF7;
+  --ink:#1D1A15; --soft:#5E5648; --rule:#E2D6BC; --gold:#C9A45C; --red:#B3202A;
+}
+.s{font-family:'DejaVu Sans','Segoe UI Symbol','Apple Symbols',sans-serif;font-weight:400}
+.r{color:var(--red)}
+
+.panel{color:var(--ink);background:var(--cream);border-radius:14px;padding:10px 14px 6px;display:flex;flex-direction:column;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 8px 22px rgba(0,0,0,.28)}
+.lbl{display:flex;align-items:center;gap:8px;font-family:'Source',sans-serif;font-weight:700;font-size:11.5px;
+  letter-spacing:1.6px;text-transform:uppercase;color:var(--felt);padding:2px 0 6px;border-bottom:1.5px solid var(--rule)}
+.lbl .s{letter-spacing:0}
+.lbl .tag{margin-left:auto;font-weight:700;letter-spacing:.3px;text-transform:none;font-size:13.5px;
+  color:var(--cream);background:var(--felt);border:1.5px solid var(--felt);border-radius:20px;padding:1px 10px;white-space:nowrap}
+
+.row{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.row:last-child{border-bottom:0}
+.bids{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}
+.bid{min-width:44px;height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper);border:1.5px solid #CBBF9F;border-radius:7px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:24px;line-height:1;letter-spacing:-.3px;color:var(--ink);
+  box-shadow:0 2px 0 #D9CCAD}
+.bid .s{font-size:21px;margin-left:1px}
+.bid.word{font-family:'Source',sans-serif;font-weight:700;font-size:15px;letter-spacing:.2px}
+.po{font-size:13px;font-weight:600;color:var(--soft);margin-right:2px}
+.d{font-size:17px;line-height:1.28}
+.d b{font-weight:700}
+.d .m{display:block;color:var(--soft);font-size:14.5px;margin-top:1px}
+.pts{font-weight:700;color:var(--felt);white-space:nowrap}
+
+.note{background:var(--felt2);color:var(--cream);border:1px solid #2C5E4C;border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.35}
+.note b{color:var(--gold);font-weight:700}
+.callout{background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:9px 12px;margin:8px 0 6px;font-size:14.5px;line-height:1.35}
+.callout .big{font-family:'Fraunces',serif;font-weight:700;font-size:17px;line-height:1.3}
