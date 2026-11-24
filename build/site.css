@@ -80,7 +80,7 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .row{border-bottom:1px dashed var(--ink-soft)}
 .bid{background:var(--white);border:2px solid var(--ink);border-radius:5px;box-shadow:2px 2px 0 var(--ink);
   font-family:var(--hand);font-weight:800;color:var(--ink);letter-spacing:0}
-.bid .s{margin-left:2px}
+.bid .s{margin-left:2px;position:relative;top:3px}
 .bid.word{font-family:var(--hand);font-weight:700}
 .po{color:var(--ink-soft)}
 .d{font-size:18px;line-height:1.35}
@@ -119,7 +119,7 @@ footer.site .club{font-family:var(--hand);font-weight:700}
   .panel{padding:10px 11px 6px}
   .row{grid-template-columns:minmax(78px,max-content) 1fr;gap:10px}
   .bid{min-width:38px;height:36px;font-size:21px;padding:0 7px}
-  .bid .s{font-size:18px}
+  .bid .s{font-size:18px;top:2px}
   .d{font-size:17px}
   .d .m{font-size:15px}
   .lbl{font-size:15px}
