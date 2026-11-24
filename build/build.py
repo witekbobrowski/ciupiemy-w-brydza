@@ -26,9 +26,12 @@ FONTS = [("Fraunces", "fraunces", (400, 600, 700, 900)),
          ("Source", "source-sans-3", (400, 600, 700))]
 
 
-def font_css(base: str) -> str:
+SITE_FONTS = FONTS + [("Shantell Sans", "shantell-sans", (500, 700, 800))]
+
+
+def font_css(base: str, fonts=FONTS) -> str:
     out = []
-    for fam, pkg, weights in FONTS:
+    for fam, pkg, weights in fonts:
         for w in weights:
             for sub in ("latin", "latin-ext"):
                 out.append(f"@font-face{{font-family:'{fam}';font-weight:{w};font-display:swap;"
@@ -104,11 +107,11 @@ def build_site():
     (assets / "fonts").mkdir(parents=True, exist_ok=True)
     for f in (B / "fonts").glob("*"):
         shutil.copy(f, assets / "fonts" / f.name)
-    (assets / "style.css").write_text(font_css("fonts/") + (B / "components.css").read_text()
+    (assets / "style.css").write_text(font_css("fonts/", SITE_FONTS) + (B / "components.css").read_text()
                                       + (B / "site.css").read_text())
     (assets / "favicon.svg").write_text(
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0E3A2C"/>'
-        '<text x="32" y="46" text-anchor="middle" font-size="40" fill="#C9A45C" font-family="serif">♠</text></svg>')
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#FDFDFB" stroke="#1F2F6B" stroke-width="4"/>'
+        '<text x="32" y="46" text-anchor="middle" font-size="40" fill="#D42B3A" font-family="serif">♥</text></svg>')
 
     thumbs = "\n".join(
         f'      <a href="karty/{png_name(c)}" target="_blank" rel="noopener">'
