@@ -2,44 +2,25 @@
 *{box-sizing:border-box;margin:0;padding:0}
 .card{
   width:540px;height:960px;position:relative;overflow:hidden;
-  background:
-    radial-gradient(ellipse 120% 70% at 50% 0%, var(--felt3) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 60% at 50% 110%, #04170F 0%, transparent 70%),
-    var(--felt);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;background-position:-6px -6px;
   font-family:'Source',sans-serif; color:var(--ink);
   padding:22px 18px 18px; display:flex; flex-direction:column;
 }
-.card::before{ /* faktura sukna */
-  content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.card header{position:relative;color:var(--cream);padding:4px 6px 14px;display:flex;align-items:flex-end;justify-content:space-between}
-.card .no{font-family:'Fraunces';font-weight:900;font-size:64px;line-height:.8;color:var(--gold);letter-spacing:-2px}
+.card header{position:relative;padding:4px 6px 10px;display:flex;align-items:flex-end;justify-content:space-between}
+.card .no{font-family:var(--hand);font-weight:800;font-size:64px;line-height:.8;color:var(--red)}
 .card .t{text-align:right}
-.card h1{font-family:'Fraunces';font-weight:700;font-size:36px;line-height:1;letter-spacing:.5px}
-.card header p{font-family:'Fraunces';font-weight:400;font-size:14px;color:#BFD3C8;margin-top:6px;letter-spacing:.3px}
-.card .suits{position:absolute;left:4px;top:-14px;font-size:19px;letter-spacing:7px;color:var(--cream)}
-.card .suits .r{color:#E5555E}
-.card main{position:relative;flex:1;display:flex;flex-direction:column;gap:12px;min-height:0}
+.card h1{font-family:var(--hand);font-weight:800;font-size:36px;line-height:1}
+.card header p{font-size:15px;color:var(--ink-soft);margin-top:6px}
+.card .suits{position:absolute;left:4px;top:-14px;font-size:19px;letter-spacing:7px;color:var(--ink)}
+.card main{position:relative;flex:1;display:flex;flex-direction:column;gap:9px;min-height:0}
 .card main .panel .row{flex:1}
 .card .note{flex:none}
 .card footer{position:relative;margin-top:10px;display:flex;justify-content:space-between;align-items:baseline;
-  color:#7FA594;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;padding:0 6px}
-.card .club{font-family:'Fraunces';font-weight:600;font-size:13px;letter-spacing:.3px;text-transform:none;color:var(--gold)}
+  color:var(--ink-soft);font-size:12px;padding:0 6px}
+.card .club{font-family:var(--hand);font-weight:700;font-size:13px;color:var(--ink)}
 
-/* ---------- Motyw do druku: białe tło, mało tuszu ---------- */
+/* ---------- Motyw do druku: białe tło bez kratki ---------- */
 .card.print{background:#fff}
-.card.print::before{display:none}
-.card.print header{color:var(--felt)}
-.card.print .no{color:#A9852F}
-.card.print header p{color:var(--soft)}
-.card.print .suits{color:var(--ink)}
-.card.print .suits .r{color:var(--red)}
-.card.print .panel{background:#fff;box-shadow:none;border:1.2px solid #CDBF9C}
-.card.print .bid{background:#fff;box-shadow:none;border-color:#B9AB86}
-.card.print .lbl .tag{background:#fff;color:var(--felt)}
-.card.print .note{background:#EEF4F0;color:var(--ink);border-color:#BFD3C8}
-.card.print .note b{color:var(--felt)}
-.card.print footer{color:var(--soft)}
-.card.print .club{color:var(--felt)}
 .card.print .d{font-size:16.4px}

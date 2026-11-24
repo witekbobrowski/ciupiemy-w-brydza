@@ -18,7 +18,7 @@ build/                  generator — tu się wszystko zmienia
   card.css              rama karty 9:16 + jasny motyw do druku
   site.css              wygląd strony
   templates/            szablony HTML strony głównej i strony systemu
-  fonts/                Fraunces (karty), Shantell Sans (strona), Source Sans 3 (licencja SIL OFL)
+  fonts/                Shantell Sans, Source Sans 3 (licencja SIL OFL), symbole kolorów z DejaVu Sans
 docs/                   gotowa strona (GitHub Pages serwuje ten folder)
   index.html            strona główna
   system/index.html     system licytacji (ciupiemy.pl/system)

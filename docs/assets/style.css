@@ -1,59 +1,52 @@
-@font-face{font-family:'Fraunces';font-weight:400;font-display:swap;src:url('fonts/fraunces-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:400;font-display:swap;src:url('fonts/fraunces-latin-ext-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:600;font-display:swap;src:url('fonts/fraunces-latin-600-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:600;font-display:swap;src:url('fonts/fraunces-latin-ext-600-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:700;font-display:swap;src:url('fonts/fraunces-latin-700-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:700;font-display:swap;src:url('fonts/fraunces-latin-ext-700-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:900;font-display:swap;src:url('fonts/fraunces-latin-900-normal.woff2') format('woff2');}
-@font-face{font-family:'Fraunces';font-weight:900;font-display:swap;src:url('fonts/fraunces-latin-ext-900-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:400;font-display:swap;src:url('fonts/source-sans-3-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:400;font-display:swap;src:url('fonts/source-sans-3-latin-ext-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:600;font-display:swap;src:url('fonts/source-sans-3-latin-600-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:600;font-display:swap;src:url('fonts/source-sans-3-latin-ext-600-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:700;font-display:swap;src:url('fonts/source-sans-3-latin-700-normal.woff2') format('woff2');}
-@font-face{font-family:'Source';font-weight:700;font-display:swap;src:url('fonts/source-sans-3-latin-ext-700-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:500;font-display:swap;src:url('fonts/shantell-sans-latin-500-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:500;font-display:swap;src:url('fonts/shantell-sans-latin-ext-500-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:700;font-display:swap;src:url('fonts/shantell-sans-latin-700-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:700;font-display:swap;src:url('fonts/shantell-sans-latin-ext-700-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:800;font-display:swap;src:url('fonts/shantell-sans-latin-800-normal.woff2') format('woff2');}
 @font-face{font-family:'Shantell Sans';font-weight:800;font-display:swap;src:url('fonts/shantell-sans-latin-ext-800-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:400;font-display:swap;src:url('fonts/source-sans-3-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:400;font-display:swap;src:url('fonts/source-sans-3-latin-ext-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:600;font-display:swap;src:url('fonts/source-sans-3-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:600;font-display:swap;src:url('fonts/source-sans-3-latin-ext-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:700;font-display:swap;src:url('fonts/source-sans-3-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Source';font-weight:700;font-display:swap;src:url('fonts/source-sans-3-latin-ext-700-normal.woff2') format('woff2');}
 @font-face{font-family:'DejaVu Sans';font-display:swap;unicode-range:U+2660,U+2663,U+2665,U+2666;src:url('fonts/dejavu-sans-suits.woff2') format('woff2');}
-/* Wspólne elementy: kafelki odzywek, panele, notki. Używane w kartach i na stronie. */
+/* Wspólne elementy: kafelki odzywek, panele, notki. Używane w kartach i na stronie.
+   Wygląd „zeszyt w kratkę”: granatowy atrament, żółty zakreślacz, białe pola. */
 :root{
-  --felt:#0E3A2C; --felt2:#082A20; --felt3:#15513D; --cream:#F7F0E1; --paper:#FFFDF7;
-  --ink:#1D1A15; --soft:#5E5648; --rule:#E2D6BC; --gold:#C9A45C; --red:#B3202A;
+  --paper:#FDFDFB; --grid:#E9EFF6; --ink:#16224F; --ink-soft:#3D4975;
+  --red:#D42B3A; --marker:#FFE45C; --table:#2E7D5B; --white:#FFFFFF;
+  --hand:'Shantell Sans','Source',system-ui,sans-serif;
 }
 .s{font-family:'DejaVu Sans','Segoe UI Symbol','Apple Symbols',sans-serif;font-weight:400}
 .r{color:var(--red)}
 
-.panel{color:var(--ink);background:var(--cream);border-radius:14px;padding:10px 14px 6px;display:flex;flex-direction:column;
-  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 8px 22px rgba(0,0,0,.28)}
-.lbl{display:flex;align-items:center;gap:8px;font-family:'Source',sans-serif;font-weight:700;font-size:11.5px;
-  letter-spacing:1.6px;text-transform:uppercase;color:var(--felt);padding:2px 0 6px;border-bottom:1.5px solid var(--rule)}
-.lbl .s{letter-spacing:0}
-.lbl .tag{margin-left:auto;font-weight:700;letter-spacing:.3px;text-transform:none;font-size:13.5px;
-  color:var(--cream);background:var(--felt);border:1.5px solid var(--felt);border-radius:20px;padding:1px 10px;white-space:nowrap}
+.panel{color:var(--ink);background:var(--white);border:2px solid var(--ink);border-radius:6px;padding:8px 12px 5px;
+  display:flex;flex-direction:column}
+.lbl{display:flex;align-items:center;gap:8px;font-family:var(--hand);font-weight:700;font-size:14px;line-height:1.25;
+  color:var(--ink);padding:0 0 5px;border-bottom:2px solid var(--ink)}
+.lbl .tag{margin-left:auto;font-weight:700;font-size:13px;color:var(--ink);background:var(--marker);
+  border:1.5px solid var(--ink);border-radius:4px;padding:0 8px;white-space:nowrap}
 
-.row{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.row{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--ink-soft)}
 .row:last-child{border-bottom:0}
 .bids{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}
-.bid{min-width:44px;height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;
-  background:var(--paper);border:1.5px solid #CBBF9F;border-radius:7px;
-  font-family:'Fraunces',serif;font-weight:700;font-size:24px;line-height:1;letter-spacing:-.3px;color:var(--ink);
-  box-shadow:0 2px 0 #D9CCAD}
-.bid .s{font-size:21px;margin-left:1px}
-.bid.word{font-family:'Source',sans-serif;font-weight:700;font-size:15px;letter-spacing:.2px}
-.po{font-size:13px;font-weight:600;color:var(--soft);margin-right:2px}
+.bid{min-width:44px;height:40px;padding:0 8px;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--white);border:2px solid var(--ink);border-radius:5px;
+  font-family:var(--hand);font-weight:800;font-size:23px;line-height:1;color:var(--ink);
+  box-shadow:2px 2px 0 var(--ink)}
+.bid .s{font-size:20px;margin-left:2px;position:relative;top:3px}
+.bid.word{font-weight:700;font-size:15px}
+.po{font-size:13px;font-weight:600;color:var(--ink-soft);margin-right:2px}
 .d{font-size:17px;line-height:1.28}
 .d b{font-weight:700}
-.d .m{display:block;color:var(--soft);font-size:14.5px;margin-top:1px}
-.pts{font-weight:700;color:var(--felt);white-space:nowrap}
+.d .m{display:block;color:var(--ink-soft);font-size:14.5px;margin-top:1px}
+.pts{font-weight:700;color:var(--ink);background:var(--marker);padding:0 .12em;white-space:nowrap}
 
-.note{background:var(--felt2);color:var(--cream);border:1px solid #2C5E4C;border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.35}
-.note b{color:var(--gold);font-weight:700}
-.callout{background:var(--paper);border:1.5px solid var(--gold);border-radius:10px;padding:9px 12px;margin:8px 0 6px;font-size:14.5px;line-height:1.35}
-.callout .big{font-family:'Fraunces',serif;font-weight:700;font-size:17px;line-height:1.3}
+.note{background:var(--white);color:var(--ink);border:2px dashed var(--ink);border-radius:6px;padding:10px 14px;font-size:14px;line-height:1.35}
+.note b{font-weight:700;background:var(--marker);padding:0 .15em}
+.callout{background:var(--marker);border:2px solid var(--ink);border-radius:6px;padding:9px 12px;margin:8px 0 6px;font-size:14.5px;line-height:1.35}
+.callout .big{font-family:var(--hand);font-weight:700;font-size:17px;line-height:1.3}
 /* Strona klubu: zeszyt w kratkę. Wspólne klasy (.panel, .bid, .row…) z components.css
    są tu nadpisane tylko dla strony; ten plik jest doklejany po components.css. */
 :root{

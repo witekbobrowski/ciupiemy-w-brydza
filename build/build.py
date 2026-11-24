@@ -22,11 +22,8 @@ DOCS = ROOT / "docs"
 KARTY = DOCS / "karty"
 TMP = B / ".tmp"
 
-FONTS = [("Fraunces", "fraunces", (400, 600, 700, 900)),
+FONTS = [("Shantell Sans", "shantell-sans", (500, 700, 800)),
          ("Source", "source-sans-3", (400, 600, 700))]
-
-
-SITE_FONTS = FONTS + [("Shantell Sans", "shantell-sans", (500, 700, 800))]
 
 
 def font_css(base: str, fonts=FONTS) -> str:
@@ -110,7 +107,7 @@ def build_site():
     (assets / "fonts").mkdir(parents=True, exist_ok=True)
     for f in (B / "fonts").glob("*"):
         shutil.copy(f, assets / "fonts" / f.name)
-    (assets / "style.css").write_text(font_css("fonts/", SITE_FONTS) + (B / "components.css").read_text()
+    (assets / "style.css").write_text(font_css("fonts/") + (B / "components.css").read_text()
                                       + (B / "site.css").read_text())
     (assets / "favicon.svg").write_text(
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#FDFDFB" stroke="#1F2F6B" stroke-width="4"/>'
