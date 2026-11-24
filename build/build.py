@@ -14,7 +14,7 @@ import asyncio, html, os, re, shutil, sys, zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from content import CARDS, CONVENTIONS, CLUB, CITY_YEAR, Row, Panel, Note  # noqa: E402
+from content import CARDS, CONVENTIONS, CLUB, CITY_YEAR, SITE_URL, Row, Panel, Note  # noqa: E402
 from playwright.async_api import async_playwright            # noqa: E402
 
 B = Path(__file__).resolve().parent
@@ -124,7 +124,7 @@ def build_site():
         f'width="1080" height="1920"></figure>'
         for c in CARDS)
     idx = (B / "templates/index.html").read_text()
-    idx = idx.replace("{{THUMBS}}", thumbs).replace("{{GALLERY}}", gallery).replace("{{ROOT}}", "")
+    idx = idx.replace("{{THUMBS}}", thumbs).replace("{{GALLERY}}", gallery).replace("{{ROOT}}", "").replace("{{SITE_URL}}", SITE_URL)
     (DOCS / "index.html").write_text(idx)
 
     nav = "\n".join(f'<a href="#{c.slug}"><b>{c.no}</b>{html.escape(c.title)}</a>' for c in CARDS)
@@ -143,7 +143,7 @@ def build_site():
                          for n, d, slug in CONVENTIONS)
                + '</dl></section></article>')
     sysp = (B / "templates/system.html").read_text()
-    sysp = sysp.replace("{{NAV}}", nav).replace("{{SYSTEM}}", system).replace("{{ROOT}}", "../")
+    sysp = sysp.replace("{{NAV}}", nav).replace("{{SYSTEM}}", system).replace("{{ROOT}}", "../").replace("{{SITE_URL}}", SITE_URL)
     (DOCS / "system").mkdir(exist_ok=True)
     (DOCS / "system/index.html").write_text(sysp)
 
@@ -202,9 +202,41 @@ async def build_cards():
     shutil.rmtree(TMP, ignore_errors=True)
 
 
+# ---------- obrazek do podglądu linku (Open Graph), 1200x630 ----------
+async def build_og():
+    svg = re.search(r'<svg class="table-svg".*?</svg>', (B / "templates/index.html").read_text(), re.S).group(0)
+    TMP.mkdir(exist_ok=True)
+    f = TMP / "og.html"
+    f.write_text(f"""<!doctype html><html lang="pl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="{(DOCS / 'assets/style.css').as_uri()}">
+<style>
+body{{width:1200px;height:630px;min-height:0;overflow:hidden}}
+.og{{display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:center;height:630px;padding:0 72px}}
+.og h1{{font-family:var(--hand);font-weight:800;font-size:108px;line-height:.95;margin-bottom:26px}}
+.og .sub{{font-size:36px;line-height:1.3;margin-bottom:26px;max-width:none}}
+.og .when{{font-family:var(--hand);font-weight:700;font-size:32px;line-height:1.3;max-width:none}}
+</style></head><body><div class="og"><div><h1>Ciupiemy<br>w brydża</h1>
+<p class="sub"><mark>Brydż dla początkujących</mark></p>
+<p class="when">Poniedziałki od 18:00<br>Léa Bistro, Kraków</p></div><div>{svg}</div></div></body></html>""")
+    launch = {"args": ["--allow-file-access-from-files"]}
+    if os.environ.get("CHROME_PATH"):
+        launch["executable_path"] = os.environ["CHROME_PATH"]
+    async with async_playwright() as p:
+        br = await p.chromium.launch(**launch)
+        pg = await br.new_page(viewport={"width": 1200, "height": 630})
+        await pg.goto(f.as_uri())
+        await pg.evaluate("document.fonts.ready")
+        await pg.wait_for_timeout(300)
+        await pg.screenshot(path=str(DOCS / "assets/og.png"))
+        await br.close()
+    shutil.rmtree(TMP, ignore_errors=True)
+    print("  PNG  assets/og.png")
+
+
 if __name__ == "__main__":
     print("Karty…")
     asyncio.run(build_cards())
     print("Strona…")
     build_site()
+    asyncio.run(build_og())
     print("Gotowe. Podgląd strony:  python -m http.server -d docs 8000")

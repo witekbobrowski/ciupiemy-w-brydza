@@ -69,3 +69,7 @@ karta ma ok. 7,5 × 13,5 cm. Dobrze wygląda zalaminowana.
 3. Po propagacji DNS (zwykle do kilku godzin) w **Settings → Pages** zaznacz **Enforce HTTPS**.
 
 Aktualne adresy IP GitHub Pages: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+
+## Podgląd linku
+
+Obrazek `docs/assets/og.png` (1200 × 630) i znaczniki Open Graph powstają przy budowaniu. Adres strony jest w `SITE_URL` w `build/content.py`; po podpięciu domeny trzeba go zmienić i zbudować stronę od nowa.
