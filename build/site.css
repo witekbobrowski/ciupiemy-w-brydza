@@ -149,7 +149,7 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .t-bid{font-family:var(--hand);font-weight:800;font-size:21px;fill:var(--ink)}
 .t-pass{font-family:var(--hand);font-weight:700;font-size:16px;fill:var(--ink)}
 .t-suit{font-family:'DejaVu Sans',sans-serif;font-size:20px;fill:var(--red)}
-.table-cap{font-family:var(--hand);font-weight:700;font-size:21px;text-align:center;max-width:none;margin-top:4px}
+.table-cap{font-family:var(--hand);font-weight:700;font-size:21px;text-align:center;max-width:none;margin-top:16px}
 .t-props *{stroke:var(--ink);stroke-width:2}
 .t-sheet{fill:var(--white)}
 .t-sheet-no{font-family:var(--hand);font-weight:800;font-size:13px;fill:var(--red);stroke:none}
@@ -175,10 +175,10 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .t-item{transform:rotate(var(--r,0deg))}
 .t-back,.t-face{transition:opacity .15s}
 .t-face{opacity:0}
-.t-rank{font-family:var(--hand);font-weight:800;font-size:13px;fill:var(--ink)}
-.t-fsuit{font-family:'DejaVu Sans',sans-serif;font-size:12px;fill:var(--ink)}
+.t-rank{font-family:var(--hand);font-weight:800;font-size:11px;fill:var(--ink);letter-spacing:-.5px}
+.t-fsuit{font-family:'DejaVu Sans',sans-serif;font-size:10px;fill:var(--ink)}
 .t-fred .t-rank,.t-fred .t-fsuit{fill:var(--red)}
-.t-hand:hover{transform:scale(1.2)}
+.t-hand:hover{transform:scale(1.1)}
 .t-c{transition:transform .2s ease}
 .t-hand:hover .t-c{transform:translateX(var(--dx))}
 .t-hand:hover .t-back{opacity:0}
@@ -186,3 +186,6 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .t-item:hover{transform:rotate(calc(var(--r,0deg) + 10deg)) scale(1.15)}
 .t-item .t-beer,.t-item .t-coffee,.t-item .t-water{transform-box:fill-box;transform-origin:center;transition:transform .3s ease}
 .t-item:hover .t-beer,.t-item:hover .t-coffee,.t-item:hover .t-water{transform:scale(.55)}
+.table-svg{overflow:visible}
+.t-ghosthand .t-card{fill:var(--paper);stroke-dasharray:5 4}
+.t-ghosthand:hover .t-card{fill:var(--white);stroke-dasharray:none}
