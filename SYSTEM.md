@@ -1,8 +1,8 @@
 # System licytacji klubu Ciupiemy w brydża
 
 Naturalny system z pięciokartowymi starszymi i krótkim treflem. Najbliżej mu do amerykańskiego
-**SAYC** (Standard American Yellow Card). Źródłem są odręczne karteczki klubowe (`zrodla/karteczki/`)
-oraz poprawki naniesione na wydruki (`zrodla/poprawki/`).
+**SAYC** (Standard American Yellow Card). Źródłem są odręczne karteczki klubowe
+oraz poprawki naniesione na wydruki.
 
 Treść kart i strony generuje się z `build/content.py`. Ten plik jest opisem i uzasadnieniem.
 

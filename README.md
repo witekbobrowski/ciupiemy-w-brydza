@@ -32,7 +32,6 @@ build/                  generator: tu się wszystko zmienia
   fonts/                Shantell Sans, Source Sans 3, symbole kolorów z DejaVu Sans (z licencjami)
 docs/                   gotowa strona; GitHub Pages serwuje ten folder (nie edytuj ręcznie)
 SYSTEM.md               pełny opis systemu, historia poprawek i otwarte pytania
-zrodla/                 zdjęcia odręcznych karteczek, od których wszystko się zaczęło
 ```
 
 ## Jak zbudować
@@ -86,5 +85,5 @@ Zasady dla poprawek są w [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Licencja
 
 - Kod generatora: [MIT](LICENSE).
-- Treść (opis systemu, teksty, karty, ilustracje, zdjęcia): [CC BY 4.0](LICENSE-CONTENT.md).
+- Treść (opis systemu, teksty, karty, ilustracje): [CC BY 4.0](LICENSE-CONTENT.md).
 - Kroje pisma w `build/fonts/` mają własne licencje, dołączone obok plików.
