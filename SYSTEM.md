@@ -110,3 +110,5 @@ Orientacyjnie: szlemik ≈ 33 PC na linii, szlem ≈ 37 PC (ogólna reguła, nie
 
 Najbliższy profil to **SAYC** (`Menu → Settings → Bidding conventions`). Nie wybierać Polish Club
 (to WJ). 2/1 jest blisko, ale z forsingiem do końcówki po odpowiedzi 2 w nowy kolor.
+
+Na stronie polecamy też **Tricky Bridge** (nauka od zera, po angielsku) i **BBO** (gra z ludźmi i robotami; roboty licytują 2/1).

@@ -130,3 +130,20 @@ CARDS = [
              "**Szlemik ≈ 33 PC** na linii · **szlem ≈ 37 PC**."),
     ]),
 ]
+
+
+# Konwencje — lista na stronie systemu. (nazwa, opis, slug karty ze szczegółami)
+CONVENTIONS = [
+    ("Krótki trefl", "Otwarcie 1♣ już od 3 kart, gdy nie masz piątki w kolorze starszym.", "otwarcia"),
+    ("Słabe dwójki", "Otwarcia 2♦, 2♥ i 2♠ z 6-kartą i ok. 10 PC. Blokują przeciwników.", "otwarcia"),
+    ("Silne 2♣", "Jedyne otwarcie forsujące: 22+ PC lub 4 szybkie lewy z góry. Odpowiedź 2♦ to negat, 0–8 PC.", "otwarcia"),
+    ("Stayman", "2♣ po 1BA partnera: pytanie o czwórkę ♠ lub ♥. Od 7–9 PC.", "odpowiedzi"),
+    ("Transfery", "Po 1BA partnera 2♦ pokazuje 5+♥, a 2♥ pokazuje 5+♠. Dowolna siła.", "odpowiedzi"),
+    ("2♠ na młodsze", "Po 1BA partnera: 5+♣, 5+♦ lub 4-4 w młodszych. Partner musi odpowiedzieć 3♣.", "odpowiedzi"),
+    ("Kontra wywoławcza", "Kontra po otwarciu przeciwnika, od 13 PC. Partner musi odpowiedzieć.", "obrona"),
+    ("2BA po kontrze", "Gdy przeciwnik skontruje otwarcie partnera, 2BA pokazuje poparcie jego koloru.", "obrona"),
+    ("Cappelletti", "Wejście po 1BA przeciwnika: 2♣ jeden kolor, 2♦ oba starsze, "
+                    "2♥ lub 2♠ starszy z młodszym, 2BA oba młodsze.", "obrona"),
+    ("Gerber", "4♣ pyta o asy, gdy nie ma uzgodnionego atu.", "asy"),
+    ("RKCB 1430", "4BA pyta o pięć kluczy (4 asy i król atutowy), gdy atu jest ustalone.", "asy"),
+]

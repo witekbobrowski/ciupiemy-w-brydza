@@ -2,7 +2,7 @@
 """
 Buduje wszystko z build/content.py:
   docs/karty/bryd-N-*.png       karty na telefon, 1080x1920 (9:16)
-  docs/karty/karty-do-druku.pdf A4 poziomo, 2 karty na stronę, jasny motyw
+  docs/karty/karty-do-druku.pdf A4 pionowo, 4 karty na jednej stronie, jasny motyw
   docs/index.html, docs/system/index.html   strona klubu
 
 Wymaga: pip install playwright && playwright install chromium
@@ -13,7 +13,7 @@ import asyncio, html, os, re, shutil, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from content import CARDS, CLUB, CITY_YEAR, Row, Panel, Note  # noqa: E402
+from content import CARDS, CONVENTIONS, CLUB, CITY_YEAR, Row, Panel, Note  # noqa: E402
 from playwright.async_api import async_playwright            # noqa: E402
 
 B = Path(__file__).resolve().parent
@@ -36,6 +36,9 @@ def font_css(base: str, fonts=FONTS) -> str:
             for sub in ("latin", "latin-ext"):
                 out.append(f"@font-face{{font-family:'{fam}';font-weight:{w};font-display:swap;"
                            f"src:url('{base}{pkg}-{sub}-{w}-normal.woff2') format('woff2');}}")
+    # kolory kart (♠♥♦♣) zawsze z tego samego kroju, niezależnie od systemu
+    out.append(f"@font-face{{font-family:'DejaVu Sans';font-display:swap;unicode-range:U+2660,U+2663,U+2665,U+2666;"
+               f"src:url('{base}dejavu-sans-suits.woff2') format('woff2');}}")
     return "\n".join(out) + "\n"
 
 
@@ -127,6 +130,15 @@ def build_site():
         f'<div><h3>{html.escape(c.title)}</h3><p>{fmt(c.sub)}</p></div></div>'
         + "".join(render_block(b, False) for b in c.blocks) + "</article>"
         for c in CARDS)
+    titles = {c.slug: c for c in CARDS}
+    nav += '\n<a href="#konwencje">Konwencje</a>'
+    system += ('\n<article class="sys-card conv" id="konwencje"><div class="sys-head"><div>'
+               '<h3>Konwencje</h3><p>Wszystkie umowy, których używamy, w jednym spisie</p></div></div>'
+               '<section class="panel"><dl>'
+               + "".join(f'<div class="conv-row"><dt>{fmt(n)}</dt><dd>{fmt(d)} '
+                         f'<a href="#{slug}">Karta {titles[slug].no}: {html.escape(titles[slug].title)}</a></dd></div>'
+                         for n, d, slug in CONVENTIONS)
+               + '</dl></section></article>')
     sysp = (B / "templates/system.html").read_text()
     sysp = sysp.replace("{{NAV}}", nav).replace("{{SYSTEM}}", system).replace("{{ROOT}}", "../")
     (DOCS / "system").mkdir(exist_ok=True)
@@ -135,22 +147,19 @@ def build_site():
 
 # ---------- karty ----------
 def print_html(css: str) -> str:
-    # A4 poziomo = 297x210 mm. Karta 9:16 skalowana do ok. 109x194 mm, z linią cięcia.
-    scale = 0.765
-    pages = []
-    for i in range(0, len(CARDS), 2):
-        slots = "".join(
-            f'<div class="slot"><div class="scaled">{render_card(c, "print")}</div></div>'
-            for c in CARDS[i:i + 2])
-        pages.append(f'<div class="sheet">{slots}</div>')
+    # A4 pionowo = 210x297 mm, 4 karty (2x2). Karta 9:16 skalowana do ok. 76x135 mm, z linią cięcia.
+    scale = 0.53
+    slots = "".join(
+        f'<div class="slot"><div class="scaled">{render_card(c, "print")}</div></div>'
+        for c in CARDS)
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{css}
-@page{{size:A4 landscape;margin:0}}
+@page{{size:A4 portrait;margin:0}}
 html,body{{background:#fff}}
-.sheet{{width:297mm;height:210mm;display:flex;justify-content:center;align-items:center;gap:16mm;
-  page-break-after:always;break-after:page;overflow:hidden}}
+.sheet{{width:210mm;height:297mm;display:grid;grid-template-columns:repeat(2,max-content);
+  justify-content:center;align-content:center;gap:10mm 14mm;overflow:hidden}}
 .slot{{width:{540*scale}px;height:{960*scale}px;outline:.25mm dashed #B9B9B9;outline-offset:2.5mm}}
 .scaled{{transform:scale({scale});transform-origin:0 0;width:540px;height:960px}}
-</style></head><body>{"".join(pages)}</body></html>"""
+</style></head><body><div class="sheet">{slots}</div></body></html>"""
 
 
 async def build_cards():
@@ -178,7 +187,7 @@ async def build_cards():
         await pg.goto(f.as_uri())
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(300)
-        await pg.pdf(path=str(KARTY / "karty-do-druku.pdf"), width="297mm", height="210mm",
+        await pg.pdf(path=str(KARTY / "karty-do-druku.pdf"), width="210mm", height="297mm",
                      print_background=True, prefer_css_page_size=True)
         print("  PDF  karty-do-druku.pdf")
         await br.close()
