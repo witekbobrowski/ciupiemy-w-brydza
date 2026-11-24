@@ -205,7 +205,7 @@ footer.site .club{font-family:var(--hand);font-weight:700}
 .t-sheet-tag{fill:var(--marker);stroke-width:1}
 .t-sheet-lines{fill:none;stroke-width:1.5;opacity:.55}
 .t-saucer,.t-cup,.t-glass{fill:var(--white)}
-.t-handle{fill:none;stroke-width:5;stroke-linecap:round}
+.t-handle{fill:var(--white)}
 .t-coffee{fill:#6B4A2B;stroke-width:1.5}
 .t-bottle{fill:#8A5A2B}
 .t-bottle-in{fill:none;stroke:#fff;stroke-width:1.5;opacity:.35}
