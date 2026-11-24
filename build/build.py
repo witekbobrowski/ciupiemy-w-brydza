@@ -115,6 +115,10 @@ def build_site():
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#FDFDFB" stroke="#1F2F6B" stroke-width="4"/>'
         '<text x="32" y="46" text-anchor="middle" font-size="40" fill="#D42B3A" font-family="serif">♥</text></svg>')
 
+    # własna domena: GitHub Pages czyta ją z pliku CNAME
+    host = SITE_URL.split("//", 1)[1].strip("/").split("/")[0]
+    if not host.endswith("github.io"):
+        (DOCS / "CNAME").write_text(host + "\n")
     thumbs = "\n".join(
         f'      <a href="karty/{png_name(c)}" target="_blank" rel="noopener">'
         f'<img src="karty/{png_name(c)}" alt="Karta {c.no}: {html.escape(c.title)}" loading="lazy" width="1080" height="1920"></a>'

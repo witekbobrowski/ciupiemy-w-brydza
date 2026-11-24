@@ -56,7 +56,7 @@ karta ma ok. 7,5 × 13,5 cm. Dobrze wygląda zalaminowana.
 ## Hosting i domena (GitHub Pages)
 
 1. Repozytorium na GitHubie → **Settings → Pages** → Source: *Deploy from a branch*, branch `main`, folder `/docs`.
-2. Po zakupie domeny: **Settings → Pages → Custom domain** wpisz `ciupiemy.pl` (GitHub sam doda plik `docs/CNAME` — potem zrób `git pull`). U rejestratora domeny ustaw DNS:
+2. Po zakupie domeny: **Settings → Pages → Custom domain** wpisz `ciupiemy.pl` (plik `docs/CNAME` tworzy się przy budowaniu z `SITE_URL` w `build/content.py`). U rejestratora domeny ustaw DNS:
 
    | Typ   | Nazwa | Wartość |
    |-------|-------|---------|
@@ -64,7 +64,7 @@ karta ma ok. 7,5 × 13,5 cm. Dobrze wygląda zalaminowana.
    | A     | @     | 185.199.109.153 |
    | A     | @     | 185.199.110.153 |
    | A     | @     | 185.199.111.153 |
-   | CNAME | www   | `<twoj-login>.github.io` |
+   | CNAME | www   | `witekbobrowski.github.io` |
 
 3. Po propagacji DNS (zwykle do kilku godzin) w **Settings → Pages** zaznacz **Enforce HTTPS**.
 

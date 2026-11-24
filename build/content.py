@@ -49,7 +49,7 @@ class Card:
 
 CLUB = "Ciupiemy w brydża"
 # Publiczny adres strony (z ukośnikiem na końcu). Potrzebny do podglądu linku; zmień po podpięciu domeny.
-SITE_URL = "https://witekbobrowski.github.io/ciupiemy-w-brydza/"
+SITE_URL = "https://ciupiemy.pl/"
 CITY_YEAR = "Kraków 2026"
 
 CARDS = [
